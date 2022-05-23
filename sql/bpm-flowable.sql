@@ -44,7 +44,7 @@ BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for ACT_GE_BYTEARRAY
+-- Table structure for ACT_GE_BYTEARRAY bmpn xml 数据存储成二进制，保存了一份基础数据 流程发布时，绑定deployment，产生新记录 也会存储图片
 -- ----------------------------
 DROP TABLE IF EXISTS `ACT_GE_BYTEARRAY`;
 CREATE TABLE `ACT_GE_BYTEARRAY` (
@@ -292,14 +292,14 @@ INSERT INTO `ACT_HI_IDENTITYLINK` VALUES ('cd377667-97ed-11ec-a2b9-862bc1a4a054'
 COMMIT;
 
 -- ----------------------------
--- Table structure for ACT_HI_PROCINST
+-- Table structure for ACT_HI_PROCINST 历史流程发起表
 -- ----------------------------
 DROP TABLE IF EXISTS `ACT_HI_PROCINST`;
 CREATE TABLE `ACT_HI_PROCINST` (
   `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
   `REV_` int DEFAULT '1',
-  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
-  `BUSINESS_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '绑定的流程模型',
+  `BUSINESS_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '绑定的流程业务表',
   `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
   `START_TIME_` datetime(3) NOT NULL,
   `END_TIME_` datetime(3) DEFAULT NULL,
@@ -646,7 +646,7 @@ BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for ACT_RE_DEPLOYMENT
+-- Table structure for ACT_RE_DEPLOYMENT  流程发布表
 -- ----------------------------
 DROP TABLE IF EXISTS `ACT_RE_DEPLOYMENT`;
 CREATE TABLE `ACT_RE_DEPLOYMENT` (
@@ -671,21 +671,21 @@ INSERT INTO `ACT_RE_DEPLOYMENT` VALUES ('bfb4c0a3-97ed-11ec-a2b9-862bc1a4a054', 
 COMMIT;
 
 -- ----------------------------
--- Table structure for ACT_RE_MODEL
+-- Table structure for ACT_RE_MODEL deployment绑定，绑定最新的流程
 -- ----------------------------
 DROP TABLE IF EXISTS `ACT_RE_MODEL`;
 CREATE TABLE `ACT_RE_MODEL` (
   `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
-  `REV_` int DEFAULT NULL,
+  `REV_` int DEFAULT NULL COMMENT '修改版本号',
   `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '流程分类',
   `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
   `LAST_UPDATE_TIME_` timestamp(3) NULL DEFAULT NULL,
-  `VERSION_` int DEFAULT NULL,
+  `VERSION_` int DEFAULT NULL COMMENT '版本号',
   `META_INFO_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
   `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
-  `EDITOR_SOURCE_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+  `EDITOR_SOURCE_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL  COMMENT '关联的设计流程表ACT_GE_BYTEARRAY，bpmnXml格式',
   `EDITOR_SOURCE_EXTRA_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
   PRIMARY KEY (`ID_`),
@@ -705,7 +705,7 @@ INSERT INTO `ACT_RE_MODEL` VALUES ('4b4909d8-97e7-11ec-8e20-862bc1a4a054', 6, 'f
 COMMIT;
 
 -- ----------------------------
--- Table structure for ACT_RE_PROCDEF
+-- Table structure for ACT_RE_PROCDEF 流程定义信息表--
 -- ----------------------------
 DROP TABLE IF EXISTS `ACT_RE_PROCDEF`;
 CREATE TABLE `ACT_RE_PROCDEF` (

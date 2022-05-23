@@ -43,6 +43,7 @@ export const DICT_TYPE = {
   BPM_PROCESS_INSTANCE_RESULT: 'bpm_process_instance_result',
   BPM_TASK_ASSIGN_SCRIPT: 'bpm_task_assign_script',
   BPM_OA_LEAVE_TYPE: 'bpm_oa_leave_type',
+  BPM_OA_OWP_TYPE: 'bpm_oa_owp_type',
 
   // ========== PAY 模块 ==========
   PAY_CHANNEL_WECHAT_VERSION: 'pay_channel_wechat_version', // 微信渠道版本

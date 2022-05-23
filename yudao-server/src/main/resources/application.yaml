@@ -83,6 +83,7 @@ yudao:
     timeout: 5m
     width: 160
     height: 60
+    enable: false
   codegen:
     base-package: ${yudao.info.base-package}
     db-schemas: ${spring.datasource.dynamic.datasource.master.name}

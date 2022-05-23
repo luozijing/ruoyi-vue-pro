@@ -3,6 +3,7 @@ package cn.iocoder.yudao.module.bpm.framework.flowable.core.listener;
 import cn.iocoder.yudao.module.bpm.dal.dataobject.task.BpmTaskExtDO;
 import cn.iocoder.yudao.module.bpm.service.task.BpmTaskService;
 import com.google.common.collect.ImmutableSet;
+import lombok.extern.slf4j.Slf4j;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEntityEvent;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEventType;
 import org.flowable.engine.delegate.event.AbstractFlowableEngineEventListener;
@@ -19,6 +20,7 @@ import java.util.Set;
  * @author jason
  */
 @Component
+@Slf4j
 public class BpmTaskEventListener extends AbstractFlowableEngineEventListener {
 
     @Resource
@@ -37,16 +39,19 @@ public class BpmTaskEventListener extends AbstractFlowableEngineEventListener {
 
     @Override
     protected void taskCreated(FlowableEngineEntityEvent event) {
+        log.info("taskCreated {}", event);
         taskService.createTaskExt((Task) event.getEntity());
     }
 
     @Override
     protected void taskCompleted(FlowableEngineEntityEvent event) {
+        log.info("taskCompleted {}", event);
         taskService.updateTaskExtComplete((Task)event.getEntity());
     }
 
     @Override
     protected void taskAssigned(FlowableEngineEntityEvent event) {
+        log.info("taskAssigned {}", event);
         taskService.updateTaskExtAssign((Task)event.getEntity());
     }
 }

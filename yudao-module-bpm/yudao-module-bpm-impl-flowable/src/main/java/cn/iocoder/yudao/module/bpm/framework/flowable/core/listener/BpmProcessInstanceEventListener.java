@@ -3,6 +3,7 @@ package cn.iocoder.yudao.module.bpm.framework.flowable.core.listener;
 import cn.iocoder.yudao.module.bpm.dal.dataobject.task.BpmProcessInstanceExtDO;
 import cn.iocoder.yudao.module.bpm.service.task.BpmProcessInstanceService;
 import com.google.common.collect.ImmutableSet;
+import lombok.extern.slf4j.Slf4j;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEntityEvent;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEventType;
 import org.flowable.engine.delegate.event.AbstractFlowableEngineEventListener;
@@ -20,6 +21,7 @@ import java.util.Set;
  * @author jason
  */
 @Component
+@Slf4j
 public class BpmProcessInstanceEventListener extends AbstractFlowableEngineEventListener {
 
     @Resource
@@ -38,16 +40,19 @@ public class BpmProcessInstanceEventListener extends AbstractFlowableEngineEvent
 
     @Override
     protected void processCreated(FlowableEngineEntityEvent event) {
+        log.info("processCreated {}", event);
         processInstanceService.createProcessInstanceExt((ProcessInstance)event.getEntity());
     }
 
     @Override
     protected void processCancelled(FlowableCancelledEvent event) {
+        log.info("processCancelled {}", event);
         processInstanceService.updateProcessInstanceExtCancel(event);
     }
 
     @Override
     protected void processCompleted(FlowableEngineEntityEvent event) {
+        log.info("processCompleted {}", event);
         processInstanceService.updateProcessInstanceExtComplete((ProcessInstance)event.getEntity());
     }
 }

@@ -128,7 +128,17 @@ export const constantRoutes = [
         component: (resolve) => require(['@/views/bpm/oa/leave/detail'], resolve),
         name: '查看 OA 请假',
         meta: {title: '查看 OA 请假', icon: 'view', activeMenu: '/bpm/oa/leave'}
-      }
+      },{
+      path: 'oa/wop/create',
+      component: (resolve) => require(['@/views/bpm/oa/wop/create'], resolve),
+      name: '发起 OA 加班申请',
+      meta: {title: '发起 OA 请假', icon: 'form', activeMenu: '/bpm/oa/wop'}
+    },{
+      path: 'oa/wop/detail',
+      component: (resolve) => require(['@/views/bpm/oa/wop/detail'], resolve),
+      name: '查看 OA 加班申请',
+      meta: {title: '查看 OA 加班申请', icon: 'view', activeMenu: '/bpm/oa/wop'}
+    }
     ]
   }, {
     path: '/bpm',

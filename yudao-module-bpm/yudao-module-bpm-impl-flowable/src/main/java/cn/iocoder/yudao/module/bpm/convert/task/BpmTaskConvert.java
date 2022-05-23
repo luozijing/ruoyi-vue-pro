@@ -134,7 +134,7 @@ public interface BpmTaskConvert {
     default BpmMessageSendWhenTaskCreatedReqDTO convert(ProcessInstance processInstance, AdminUserRespDTO startUser, Task task) {
         BpmMessageSendWhenTaskCreatedReqDTO reqDTO = new BpmMessageSendWhenTaskCreatedReqDTO();
         reqDTO.setProcessInstanceId(processInstance.getProcessInstanceId())
-                .setProcessInstanceName(processInstance.getName())
+                .setProcessInstanceName(processInstance.getProcessDefinitionName())
                 .setStartUserId(startUser.getId())
                 .setStartUserNickname(startUser.getNickname())
                 .setTaskId(task.getId())

@@ -241,9 +241,14 @@ public class BpmTaskServiceImpl implements BpmTaskService{
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
             @Override
             public void afterCommit() {
-                ProcessInstance processInstance = processInstanceService.getProcessInstance(task.getProcessInstanceId());
-                AdminUserRespDTO startUser = adminUserApi.getUser(Long.valueOf(processInstance.getStartUserId()));
-                messageService.sendMessageWhenTaskAssigned(BpmTaskConvert.INSTANCE.convert(processInstance, startUser, task));
+                try {
+                    ProcessInstance processInstance = processInstanceService.getProcessInstance(task.getProcessInstanceId());
+                    AdminUserRespDTO startUser = adminUserApi.getUser(Long.valueOf(processInstance.getStartUserId()));
+                    messageService.sendMessageWhenTaskAssigned(BpmTaskConvert.INSTANCE.convert(processInstance, startUser, task));
+                } catch (Exception e) {
+                    log.info("afterCommit failed, reason:{}", e.getMessage());
+                }
+
             }
         });
     }

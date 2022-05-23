@@ -61,4 +61,7 @@ public interface ErrorCodeConstants {
     ErrorCode USER_GROUP_NOT_EXISTS = new ErrorCode(1009011000, "用户组不存在");
     ErrorCode USER_GROUP_IS_DISABLE = new ErrorCode(1009011001, "名字为【{}】的用户组已被禁用");
 
+    // ========== OA -OWP流程模块 1-009-012-000 ==========
+    ErrorCode OA_OWP_NOT_EXISTS = new ErrorCode(1009012001, "加班工资申请不存在");
+
 }
