@@ -9,8 +9,8 @@
         <el-form-item label="申请人的用户编号：" prop="reason"> {{ form.userId }}</el-form-item>
         <el-form-item label="开始时间：" prop="startTime"> {{parseTime(form.startTime, '{y}-{m}-{d}')}} </el-form-item>
         <el-form-item label="结束时间：" prop="endTime"> {{parseTime(form.endTime, '{y}-{m}-{d}')}} </el-form-item>
-        <el-form-item label="加班原因：" prop="reason"> <dict-tag :type="DICT_TYPE.BPM_PROCESS_INSTANCE_RESULT" :value="form.type"/></el-form-item>
-        <el-form-item label="审批结果：" prop="result"> {{ form.result }}</el-form-item>
+        <el-form-item label="加班结果：" prop="reason"> <dict-tag :type="DICT_TYPE.BPM_PROCESS_INSTANCE_RESULT" :value="form.result"/></el-form-item>
+        <el-form-item label="加班原因：" prop="result"> {{ form.reason }}</el-form-item>
       </el-form>
   </div>
 </template>

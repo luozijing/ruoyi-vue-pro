@@ -82,7 +82,7 @@ yudao:
   captcha:
     timeout: 5m
     width: 160
-    height: 60
+    height: 70
     enable: false
   codegen:
     base-package: ${yudao.info.base-package}

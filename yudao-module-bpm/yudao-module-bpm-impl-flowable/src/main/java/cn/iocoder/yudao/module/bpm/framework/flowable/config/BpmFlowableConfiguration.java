@@ -9,6 +9,7 @@ import cn.iocoder.yudao.module.system.api.dept.DeptApi;
 import cn.iocoder.yudao.module.system.api.permission.PermissionApi;
 import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
 import org.flowable.common.engine.api.delegate.event.FlowableEventListener;
+import org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable;
 import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.flowable.spring.boot.EngineConfigurationConfigurer;
 import org.springframework.beans.factory.ObjectProvider;
@@ -40,6 +41,7 @@ public class BpmFlowableConfiguration {
             configuration.setEventListeners(ListUtil.toList(listeners.iterator()));
             // 设置 ActivityBehaviorFactory 实现类，用于流程任务的审核人的自定义
             configuration.setActivityBehaviorFactory(bpmActivityBehaviorFactory);
+            configuration.setAsyncExecutorActivate(false);
         };
     }
 

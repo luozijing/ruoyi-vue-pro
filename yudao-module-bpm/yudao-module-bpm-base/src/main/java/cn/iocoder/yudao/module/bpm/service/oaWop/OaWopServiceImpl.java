@@ -54,8 +54,11 @@ public class OaWopServiceImpl implements OaWopService {
 
         // 发起 BPM 流程 生成流程实例
         Map<String, Object> processInstanceVariables = new HashMap<>();
-        processInstanceVariables.put("workTime ", day);
-        processInstanceVariables.put("project", createReqVO.getType());
+        processInstanceVariables.put("workTime", day);
+        // ${var:containsAny(project, 3,4)} 传入的list变量是否包含 3 4
+        List<Integer> vars = new ArrayList<>();
+        vars.add(createReqVO.getType());
+        processInstanceVariables.put("project", vars);
         String processInstanceId = processInstanceApi.createProcessInstance(userID,
                 new BpmProcessInstanceCreateReqDTO().setProcessDefinitionKey(PROCESS_KEY)
                         .setVariables(processInstanceVariables).setBusinessKey(String.valueOf(oaWop.getId())));

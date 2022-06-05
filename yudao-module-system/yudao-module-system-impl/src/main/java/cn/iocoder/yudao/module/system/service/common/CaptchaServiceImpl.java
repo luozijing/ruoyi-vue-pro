@@ -49,7 +49,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 
     @Override
     public Boolean isCaptchaEnable() {
-        return enable;
+        return captchaProperties.getEnable();
     }
 
     @Override

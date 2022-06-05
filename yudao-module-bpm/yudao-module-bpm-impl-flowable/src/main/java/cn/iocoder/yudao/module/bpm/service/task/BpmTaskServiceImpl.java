@@ -17,8 +17,10 @@ import cn.iocoder.yudao.module.system.api.user.AdminUserApi;
 import cn.iocoder.yudao.module.system.api.user.dto.AdminUserRespDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.HistoryService;
+import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.history.HistoricProcessInstance;
+import org.flowable.engine.impl.persistence.entity.ExecutionEntityImpl;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.TaskQuery;
@@ -63,6 +65,9 @@ public class BpmTaskServiceImpl implements BpmTaskService{
     private BpmTaskExtMapper taskExtMapper;
     @Resource
     private BpmMessageService messageService;
+    @Resource
+    private RuntimeService runtimeService;
+
 
     @Override
     public PageResult<BpmTaskTodoPageItemRespVO> getTodoTaskPage(Long userId, BpmTaskTodoPageReqVO pageVO) {
@@ -177,7 +182,7 @@ public class BpmTaskServiceImpl implements BpmTaskService{
         if (instance == null) {
             throw exception(PROCESS_INSTANCE_NOT_EXISTS);
         }
-
+        //Map<String, Object> maps = runtimeService.getVariables(instance.getId());
         // 完成任务，审批通过
         taskService.complete(task.getId(), instance.getProcessVariables());
         // 更新任务拓展表为通过
